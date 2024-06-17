@@ -6,9 +6,11 @@ pipeline {
     }
     
     environment {
+        DOCKER_PATH = "/usr/local/bin"
         DOCKER_IMAGE = "my-artifactory-repo/spring-petclinic:latest"
         ARTIFACTORY_URL = "https://hesterinc.jfrog.io/artifactory/se-assignment-docker/"
         ARTIFACTORY_REPO = "se-assignment-docker/"
+        PATH = ${env.PATH}:${DOCKER_PATH}"
     }
 
     stages {
@@ -48,6 +50,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    // check docker cli and path
+                    sh 'docker --version'
                     // Build the Docker image
                     sh 'docker build -t ${DOCKER_IMAGE} .'
                 }
