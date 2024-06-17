@@ -1,6 +1,10 @@
 pipeline {
     agent any
-
+    
+    tools {
+        jdk 'JDK17'
+    }
+    
     environment {
         DOCKER_IMAGE = "my-artifactory-repo/spring-petclinic:latest"
         ARTIFACTORY_URL = "https://hesterinc.jfrog.io/artifactory/se-assignment-docker/"
@@ -18,8 +22,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    // check java ver
+                    sh 'java -version'
                     // Clean and compile the project
-                    sh './mvnw -B -DskipTests clean package'
+                    sh './mvnw clean compile'
                 }
             }
         }
