@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "my-artifactory-repo/spring-petclinic:latest"
-        ARTIFACTORY_URL = "https://my-artifactory-instance/artifactory"
-        ARTIFACTORY_REPO = "docker-local"
+        ARTIFACTORY_URL = "https://hesterinc.jfrog.io/artifactory/se-assignment-docker/"
+        ARTIFACTORY_REPO = "se-assignment-docker/"
     }
 
     stages {
