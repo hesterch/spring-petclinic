@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // Clean and compile the project
-                    sh './mvnw clean compile'
+                    sh './mvnw -B -DskipTests clean package'
                 }
             }
         }
