@@ -10,7 +10,7 @@ pipeline {
         DOCKER_IMAGE = "my-artifactory-repo/spring-petclinic:latest"
         ARTIFACTORY_URL = "https://hesterinc.jfrog.io/artifactory/se-assignment-docker/"
         ARTIFACTORY_REPO = "se-assignment-docker/"
-        PATH = ${env.PATH}:${DOCKER_PATH}"
+        PATH = "${env.PATH}:${DOCKER_PATH}"
     }
 
     stages {
