@@ -10,8 +10,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url 'https://github.com/hesterch/spring-petclinic.git'
+                checkout scmGit(branches: [[name: '*/master']], 
+                                extensions: [], 
+                                userRemoteConfigs: [[url: 'https://github.com/hesterch/spring-petclinic.git']])
             }
         }
         stage('Build') {
