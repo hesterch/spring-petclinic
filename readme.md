@@ -1,4 +1,28 @@
-# Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
+# Spring PetClinic Application and Jenkins Pipeline using JFrog Artifactory
+
+## Project Overview
+This project uses:
+- macOS
+- Jenkins for pipeline creation (installed locally) 
+- A trial of the JFrog Platform (SaaS version)
+- This repository for SCM 
+
+## Steps Taken
+1) Install Jenkins on macOS (https://www.jenkins.io/download/lts/macos/)
+2) Sign up for JFrog Platform 14-day trial
+
+
+
+
+
+
+
+
+
+
+
+# Spring PetClinic README from cloned repo of https://github.com/spring-projects/spring-petclinic
+## Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
 
