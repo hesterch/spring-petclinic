@@ -54,7 +54,7 @@ pipeline {
                     // check docker cli and path
                     sh 'docker --version'
                     // Build the Docker image
-                    sh 'docker build -t ${DOCKER_IMAGE} .'
+                    sh 'docker build -t ${ARTIFACTORY_URL}${DOCKER_IMAGE} .'
                 }
             }
         }
@@ -62,7 +62,7 @@ pipeline {
 			steps {
 				// dir('docker-oci-examples/docker-example/') {
 				// Scan Docker image for vulnerabilities
-				// jf 'docker scan $DOCKER_IMAGE'
+				// jf 'docker scan ${ARTIFACTORY_URL}$DOCKER_IMAGE'
 
 				// Push image to Artifactory
 				jf 'docker push ${ARTIFACTORY_URL}${DOCKER_IMAGE}'
