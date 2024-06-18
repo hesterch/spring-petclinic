@@ -8,8 +8,8 @@ pipeline {
     
     environment {
         DOCKER_PATH = "/usr/local/bin"
-        DOCKER_IMAGE = "my-artifactory-repo/spring-petclinic:latest"
-        ARTIFACTORY_URL = "https://hesterinc.jfrog.io/artifactory/se-assignment-docker/"
+        DOCKER_IMAGE = "spring-petclinic:latest"
+        ARTIFACTORY_URL = "https://hesterinc.jfrog.io/artifactory/petclinic-docker/"
         ARTIFACTORY_REPO = "se-assignment-docker/"
         PATH = "${env.PATH}:${DOCKER_PATH}"
     }
@@ -65,7 +65,7 @@ pipeline {
 				jf 'docker scan $DOCKER_IMAGE'
 
 				// Push image to Artifactory
-				jf 'docker push $DOCKER_IMAGE'
+				jf 'docker push {$ARTIFACTORY_URL}{$DOCKER_IMAGE}'
 				//}
 			}
 		}
