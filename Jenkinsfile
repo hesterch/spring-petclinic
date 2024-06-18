@@ -58,20 +58,21 @@ pipeline {
             }
         }
         stage('Push Docker Image to Artifactory') {
-            steps {
-                script {
-                    // Log in to Artifactory Docker registry (assumes credentials are set in Jenkins)
-                    withCredentials([usernamePassword(credentialsId: 'artifactory-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        // Authenticate with Artifactory using Google OAuth credentials
-                        sh """
-                        curl -u ${USERNAME}:${PASSWORD} ${ARTIFACTORY_URL}/api/security/token -X POST
-                        docker login -u ${USERNAME} -p ${PASSWORD} ${ARTIFACTORY_URL}
-                        docker build -t ${DOCKER_IMAGE} .
-                        docker push ${DOCKER_IMAGE}
-                        """
-                    }
-                }
-            }
+			steps {
+				// dir('docker-oci-examples/docker-example/') {
+				// Scan Docker image for vulnerabilities
+				jf 'docker scan $DOCKER_IMAGE'
+
+				// Push image to Artifactory
+				jf 'docker push $DOCKER_IMAGE'
+				//}
+			}
+		}
+
+		stage('Publish build info') {
+			steps {
+				jf 'rt build-publish'
+			}
         }
     }
 
