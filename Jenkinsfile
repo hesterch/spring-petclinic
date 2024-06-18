@@ -51,8 +51,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // check docker cli and path
-                    sh 'docker --version'
+                    // check docker cli and path, for debug
+                    // sh 'docker --version'
                     // Build the Docker image
                     sh 'docker build -t ${ARTIFACTORY_URL}${DOCKER_IMAGE} .'
                 }
@@ -60,13 +60,11 @@ pipeline {
         }
         stage('Push Docker Image to Artifactory') {
 			steps {
-				// dir('docker-oci-examples/docker-example/') {
-				// Scan Docker image for vulnerabilities
-				// jf 'docker scan ${ARTIFACTORY_URL}$DOCKER_IMAGE'
+				// Scan Docker image for vulnerabilities will use XRay
+				jf 'docker scan ${ARTIFACTORY_URL}$DOCKER_IMAGE'
 
 				// Push image to Artifactory
 				jf 'docker push ${ARTIFACTORY_URL}${DOCKER_IMAGE}'
-				//}
 			}
 		}
 
