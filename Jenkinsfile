@@ -61,13 +61,14 @@ pipeline {
             steps {
                 script {
                     // Log in to Artifactory Docker registry (assumes credentials are set in Jenkins)
-                    withCredentials([usernamePassword(credentialsId: 'artifactory-credentials', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
-                        sh 'docker login ${ARTIFACTORY_URL} -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWORD'
-                    }
-                    // Tag the Docker image with the Artifactory repository
-                    sh 'docker tag ${DOCKER_IMAGE} ${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}/${DOCKER_IMAGE}'
-                    // Push the Docker image to Artifactory
-                    sh 'docker push ${ARTIFACTORY_URL}/${ARTIFACTORY_REPO}/${DOCKER_IMAGE}'
+                    withCredentials([usernamePassword(credentialsId: 'google-oauth-artifactory', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        // Authenticate with Artifactory using Google OAuth credentials
+                        sh """
+                        curl -u ${USERNAME}:${PASSWORD} ${ARTIFACTORY_URL}/api/security/token -X POST
+                        docker login -u ${USERNAME} -p ${PASSWORD} ${ARTIFACTORY_URL}
+                        docker build -t ${DOCKER_IMAGE} .
+                        docker push ${DOCKER_IMAGE}
+                        """
                 }
             }
         }
