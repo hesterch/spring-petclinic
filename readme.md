@@ -14,11 +14,11 @@ This project uses:
 ## PreRequisites and How to Run this Project
 1) Install Jenkins - I chose macOS (https://www.jenkins.io/download/lts/macos/) - (note: you could also spin up a VM (AWS, Azure, GCP etc)  and install Jenkins following the Linux install option as well)
 2) Sign up for JFrog Platform 14-day trial
-2a) When you do this, there is a very intuitive set of wizards that connects walks you thru setting up your first repository for artifact hosting 
+2a) When you do this, there is a very intuitive set of wizards that walks you thru setting up your first repository for artifact hosting 
 ![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/78737697-efbf-4495-9919-d2e7e0736cf6)
 and getting JFrog set up to use in your pipeline (for me Jenkins)
 ![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/e43367d6-d637-43eb-8128-cf455d8dc27c)
-...by following the wizard above that will set up a token to use while pushing to Artifactory, and the Jfrog cli to run in your pipeline (Jfrog 'jf') - this can be viewed/configured in Jenkins under Manaage Jenkins->Tools under JFrog CLI installations.
+...by following the wizard above, a token will created for use when pushing to Artifactory, and the Jfrog cli to run in your pipeline (Jfrog 'jf') - this can be viewed/configured in Jenkins under Manaage Jenkins->Tools under JFrog CLI installations.
 3) Ensure you have the docker client / cli on your Jenkins Server
 4) Docker pipeline plugin installed (in Jenkins Dashboard->Manage Jenkins->Plugins->Available Plugins->Docker Pipeline->select Install)
 5) JDK17 on your Jenkins server with maven/gradle (I chose maven as you can see, in the Jenkinsfile)
@@ -37,11 +37,17 @@ and getting JFrog set up to use in your pipeline (for me Jenkins)
 Watch the pipeline execute in a number of ways "Console Output", "Pipeline Overview", "Pipeline Steps" etc.
 
 
+![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/3c0023b2-8c43-4a99-bc95-262eb84ed1fe)
+By using the JFrog plugins with Jenkins, along with the jf - the 'jf docker scan' entry scans a Docker image for security vulnerabilities with JFrog Xray and you will see that tabled in the console output, and in JFrog under Xray, Scans List 
+
+![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/2d34d517-c7be-4fe7-a8b1-f6539cb3477d)
+
+
 ## Hints and helpful tips
 - Take some time to familiarize yourself with the Spring-Petclinic app.  Build it, run it.  Consider dockerizing/containerizing it.
 - If you have multiple JDKs installed (eg 11 and 17), you can specify which JDK to use under Manage Jenkins->Tools.  In a non hacky/playground environment, you would have a specific JDK installed for consistency, stability, security etc.  For example if the default JDK is 11, the project won't build :(
-- Speaking of best practices, in any environments besides a sandbox type of environment, it's best to have different agents for different tasks: for example you would have a build-agent, test-agent and a docker-agent as `agent { label 'docker-agent } in your stage block before you run your steps.  This is a best practice that would enhance resource optimization, maintainability, iso purposes, scalability, etc.  These stages/steps mentioned can be resource intensive.  I did not do that here for this project.
-- I searched, experimented and found solutions as I iterated thru this project, to get the pipeline to build - but this process made me learn a lot more along the way.
+- Speaking of best practices, in any environments besides a sandbox type of environment, it's best to have different agents for different tasks: for example you would have a build-agent, test-agent and a docker-agent as `agent { label 'docker-agent' }` in your stage block before you run your steps.  This is a best practice that would enhance resource optimization, maintainability, iso purposes, scalability, etc.  These stages/steps mentioned can be resource intensive.  I did not do that here for this project.
+- I searched, experimented and found solutions as I iterated thru this project, to get the pipeline to build - but this process made me learn a lot more along the way.  JFrog has a github page with walkthroughs and samples as well, the best resource:  https://github.com/jfrog/jenkins-jfrog-plugin?tab=readme-ov-file#readme
 - Feel free to experiment, change syntax there are cli-ish ways to script or method builders (eg docker build... or docker.build)
 - Use the Jenkins Snippet Generator as well, it's going to suggest the best practice, most efficient way to scipt your pipeline.  This pipeline script ended up being pretty "bash"-y
 - You can ru-run a pipeline from a certain stage as long as you haven't changed the Jenkinsfile.  But if you modified a Dockerfile, you could re-run the "Build Docker Image" stage (as the build and test stages do taka a while).
@@ -49,8 +55,3 @@ Watch the pipeline execute in a number of ways "Console Output", "Pipeline Overv
 
 ## Sample Successful run:
 ![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/338d8545-475a-449f-9e03-4dcafffa7ed1)
-
-
-
-
-
