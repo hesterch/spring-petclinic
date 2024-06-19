@@ -18,7 +18,7 @@ This project uses:
 ![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/78737697-efbf-4495-9919-d2e7e0736cf6)
 and getting JFrog set up to use in your pipeline (for me Jenkins)
 ![Notification_Center](https://github.com/hesterch/spring-petclinic/assets/92892352/e43367d6-d637-43eb-8128-cf455d8dc27c)
-...by following the wizard above, a token will created for use when pushing to Artifactory, and the Jfrog cli to run in your pipeline (Jfrog 'jf') - this can be viewed/configured in Jenkins under Manaage Jenkins->Tools under JFrog CLI installations.
+...by following the wizard above, a token will created for use when pushing to Artifactory, and the Jfrog cli to run in your pipeline (Jfrog 'jf') - this can be viewed/configured in Jenkins under Manaage Jenkins->Tools under JFrog CLI installations.  The doc to follow is here (also listed below) https://github.com/jfrog/jenkins-jfrog-plugin?tab=readme-ov-file#readme
 3) Ensure you have the docker client / cli on your Jenkins Server
 4) Docker pipeline plugin installed (in Jenkins Dashboard->Manage Jenkins->Plugins->Available Plugins->Docker Pipeline->select Install)
 5) JDK17 on your Jenkins server with maven/gradle (I chose maven as you can see, in the Jenkinsfile)
