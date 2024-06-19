@@ -10,7 +10,6 @@ pipeline {
         DOCKER_PATH = "/usr/local/bin"
         DOCKER_IMAGE = "spring-petclinic:latest"
         ARTIFACTORY_URL = "hesterinc.jfrog.io/petclinic-docker/"
-        ARTIFACTORY_REPO = "se-assignment-docker/"
         PATH = "${env.PATH}:${DOCKER_PATH}"
     }
 
@@ -59,19 +58,19 @@ pipeline {
             }
         }
         stage('Push Docker Image to Artifactory') {
-			steps {
-				// Scan Docker image for vulnerabilities will use XRay
-				jf 'docker scan ${ARTIFACTORY_URL}$DOCKER_IMAGE'
+                steps {
+                        // Scan Docker image for vulnerabilities will use XRay
+                        jf 'docker scan ${ARTIFACTORY_URL}$DOCKER_IMAGE'
 
-				// Push image to Artifactory
-				jf 'docker push ${ARTIFACTORY_URL}${DOCKER_IMAGE}'
-			}
-		}
+                        // Push image to Artifactory
+                        jf 'docker push ${ARTIFACTORY_URL}${DOCKER_IMAGE}'
+                }
+        }
 
-		stage('Publish build info') {
-			steps {
-				jf 'rt build-publish'
-			}
+        stage('Publish build info') {
+                steps {
+                        jf 'rt build-publish'
+                }
         }
     }
 
