@@ -138,6 +138,12 @@
       <groupId>jakarta.xml.bind</groupId>
       <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
+  <!-- Using Maven Central 
+    <dependency>
+        <groupId>org.example</groupId>
+        <artifactId>example-library</artifactId>
+        <version>1.0.0</version>
+    </dependency> -->
 
   </dependencies>
 
@@ -301,7 +307,21 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-  </repositories>
+<!--  Use as a JCenter alternative 
+    <repository>
+        <id>central</id>
+        <url>https://repo.maven.apache.org/maven2</url>
+    </repository> -->
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>org.example</groupId>
+        <artifactId>example-library</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</dependencies>
+
 
   <pluginRepositories>
     <pluginRepository>
